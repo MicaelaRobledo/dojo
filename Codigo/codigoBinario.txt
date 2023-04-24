@@ -1,0 +1,54 @@
+//Nombre: Ariel Zubrzycki, Gonzalo Rojas, Micaela Robledo, Martin Urriche y Facundo Villodo
+//EJ: DOJO 1-1
+//1- El semáforo tiene que tener 2 leds de cada color como mínimo,
+//en caso de que uno se  rompa. 
+//2- Tiene que implementar los tiempos correctos como se detallan
+//a continuación. 
+//3- El verde dura 5 segundos. 
+//4- El amarillo dura 3 segundos. 
+//5- Rojo dura 5 segundos. 
+//6- Tiene que tener señalización para personas no videntes como se 
+//Detalla a  continuación. (Buzzer o piezo).
+//7- Durante el rojo: Tiene que sonar 2 veces por segundo en un 
+//tono FUERTE. 
+
+#define pin_rojo 13
+#define pin_amarillo 10
+#define pin_verde 7
+
+int tiempoLedRojo = 0;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(pin_rojo, OUTPUT);
+  pinMode(pin_amarillo, OUTPUT);
+  pinMode(pin_verde, OUTPUT);
+  pinMode(4, OUTPUT);
+}
+
+void loop()
+{
+  digitalWrite(pin_rojo, HIGH);
+
+  while(tiempoLedRojo < 5)
+  {
+    if(digitalRead(pin_rojo) == HIGH)
+    {
+      tone(4, 500, 100);
+      delay(500);
+      tone(4, 500, 100);
+    }
+    delay(1000);
+    tiempoLedRojo++;
+  }
+  digitalWrite(pin_rojo, LOW);
+  
+  digitalWrite(pin_amarillo, 1);
+  delay(3000);
+  digitalWrite(pin_amarillo, 0);
+ 
+  digitalWrite(pin_verde, HIGH);
+  delay(5000);
+  digitalWrite(pin_verde, LOW);
+}
